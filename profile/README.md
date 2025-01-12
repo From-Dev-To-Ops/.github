@@ -1,5 +1,7 @@
 ## Hi there 👋
 
+This is an initial discovery regarding the automation of the release and deployment processes of a simple Go programm using Terraform, Ansible, GitHub Actions and GitHub Container Registry.
+
 <!--
 
 **Here are some ideas to get you started:**
