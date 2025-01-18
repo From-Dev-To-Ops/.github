@@ -1,14 +1,42 @@
-## Hi there 👋
+# Automated Go Application Deployment Pipeline
 
-This is an initial discovery regarding the automation of the release and deployment processes of a simple Go programm using Terraform, Ansible, GitHub Actions and GitHub Container Registry.
+## Overview
+This diagram illustrates an automated deployment and release pipeline for a Go application using GitHub Actions, Terraform, Ansible, and DigitalOcean infrastructure.
 
-<!--
+![arch drawio](https://github.com/user-attachments/assets/783a98df-98c9-4dc1-95ff-0b5704226bf4)
 
-**Here are some ideas to get you started:**
+## Workflow Components
 
-🙋‍♀️ A short introduction - what is your organization all about?
-🌈 Contribution guidelines - how can the community get involved?
-👩‍💻 Useful resources - where can the community find your docs? Is there anything else the community should know?
-🍿 Fun facts - what does your team eat for breakfast?
-🧙 Remember, you can do mighty things with the power of [Markdown](https://docs.github.com/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
--->
+### Development Flow
+The process begins with a Go repository where:
+- Source code is maintained
+- Changes are committed to the master branch
+- New tags trigger the automation pipeline
+
+### CI/CD Pipeline
+1. **GitHub Actions**
+  - Triggered on new tags
+  - Builds the application
+  - Publishes container images to GitHub Container Registry (GHCR)
+
+### Infrastructure Management
+
+#### Onboarding Phase
+1. **Terraform** creates a new DigitalOcean droplet
+2. **Ansible**:
+  - Configures the droplet
+  - After configuration, Ansible pulls the application from GitHub Container Registry (GHCR)
+
+#### Release Phase
+1. **Ansible** manages the release process by:
+  - Pulling the latest container image from GHCR
+  - Starting the container with the updated image on the DigitalOcean droplet
+
+## Technology Stack
+- Version Control: GitHub
+- Container Registry: GitHub Container Registry
+- Infrastructure: DigitalOcean
+- IaC: Terraform
+- Configuration Management: Ansible
+- CI/CD: GitHub Actions
+- Application: Go
